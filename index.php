@@ -6,11 +6,6 @@ include 'header.php';
 
 <?php
 
-$pub_date = '2012-07-01 08:30';
-$author = 'blah';
-$text_donor = 'blerghy blergh';
-$text_response = 'blargha blargh';
-
 $query = 'SELECT users.username, pub_date, text, response 
           FROM posts 
           INNER JOIN users ON posts.author = users.pk 
