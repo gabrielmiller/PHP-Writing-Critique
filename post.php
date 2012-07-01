@@ -1,5 +1,5 @@
 <?php
-//include 'inc.database.php';
+include 'inc.database.php';
 include 'header.php';
 ?>
 <h2>Post a new piece:<h2>

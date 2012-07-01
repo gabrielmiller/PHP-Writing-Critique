@@ -66,6 +66,7 @@ else
             $_SESSION['signed_in']= true;
             $_SESSION['username'] = $username; 
             echo "Welcome back $username"; 
+            echo '<meta http-equiv="REFRESH" content="0;url=index.php">';
             }
             else
             {
