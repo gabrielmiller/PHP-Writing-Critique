@@ -1,0 +1,21 @@
+.headerset{width:960px; margin:0 auto; font-size: 1.2em;}
+#loginbar {height:64px; background-color:#79e; width:100%; padding:0px; margin:0px;}
+#loginbar li {display:inline; margin:12px; float:right;}
+#loginbar h1 {margin:8px; float:left; font-family:Times, Serif; font-size:2em;}
+#navigation {height:32px; background-color:#abd; width:100%; margin:0px;}
+#navigation li {display:inline; margin:4px 10px; float:left;}
+#wrapper {width:960px; margin:0 auto;}
+#content {}
+body {background-color:#fff; color:#000; padding:0px; margin:0px;}
+a {color:#000;}
+a:hover, a:focus {color: #64f;}
+ul{padding:0px;}
+#leftblock{float:left; margin:4px; padding:4px;width: 460px; height:480px; border:1px solid #000;}
+#rightblock{float:right; width:460px; margin:4px; padding:4px; height:480px; border:1px solid #000;}
+#footer {padding-top:24px; padding-bottom:24px; text-align:center; clear:both;}
+#footer a {text-decoration:none}
+p {margin:8px 4px; padding:0px; font-size: 1.2em; font-family: arial, sans-serif;}
+#content li {list-style-type: square;}
+h2 {margin:16px 8px; padding:0px; font-style: italic; font-size: 1.4em; font-weight:500;}
+#imagewrap {float: right; text-align: center; padding: 16px;}
+#chart {clear:both;}

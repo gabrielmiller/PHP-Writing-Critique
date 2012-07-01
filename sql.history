@@ -1,0 +1,31 @@
+CREATE DATABASE `ex10`;
+
+CREATE TABLE `users` (
+`pk` int(3) unsigned NOT NULL AUTO_INCREMENT,
+`username` varchar(60) NOT NULL,
+`email` varchar(255) NOT NULL,
+`pass` varchar(60) NOT NULL,
+`salt` varchar(60) NOT NULL,
+`create_date` DATETIME,
+) ENGINE='InnoDB';
+
+ALTER TABLE `users`
+ADD UNIQUE `username_unique` (`pk`),
+DROP INDEX `PRIMARY`;
+
+CREATE TABLE `posts` (
+`pk` int(3) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+`author` int(3) unsigned NOT NULL,
+`published` tinyint(1) NOT NULL,
+`create_date` datetime NOT NULL,
+`pub_date` datetime NOT NULL,
+`text` varchar(8000) NOT NULL,
+`response` varchar(8000) NOT NULL
+) ENGINE='InnoDB';
+
+ALTER TABLE `posts`
+ADD FOREIGN KEY (`author`) REFERENCES `users` (`pk`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+INSERT INTO `users` (`pk`, `username`, `email`, `pass`, `salt`, `create_date`)
+VALUES ('000', 'susan', 'testsusan@gmail.com', 'password', 'salt', now());
+
