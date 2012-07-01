@@ -81,7 +81,8 @@ else
     }
     else
     {
-        $salt = date('Y-m-d H:i:s');
+        $date = date('Y-m-d H:i:s');
+        $salt = time();
         $formusername = trim($_POST['username']); 
         $formpassword = trim($_POST['password']);
         $formemail =    trim($_POST['emailaddr']);
@@ -92,7 +93,7 @@ else
         $connection = dbConnect();
         $stmt = $connection->stmt_init();
         $stmt = $connection->prepare($sql);
-        $stmt->bind_param('sssss', $formusername, $formemail, $passwd, $salt, $salt);
+        $stmt->bind_param('sssis', $formusername, $formemail, $passwd, $salt, $date);
         $stmt->execute();
         if ($stmt->affected_rows == 1) 
         {
