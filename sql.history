@@ -10,8 +10,8 @@ CREATE TABLE `users` (
 ) ENGINE='InnoDB';
 
 ALTER TABLE `users`
-ADD UNIQUE `username_unique` (`pk`),
-DROP INDEX `PRIMARY`;
+ADD PRIMARY KEY (`pk`),
+ADD UNIQUE `username_unique` (`username`),
 
 CREATE TABLE `posts` (
 `pk` int(3) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,

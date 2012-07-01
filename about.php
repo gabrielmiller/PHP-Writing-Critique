@@ -45,7 +45,7 @@ include 'header.php';
     </script>
 
 <div id="chart"></div>
-<p>This website is entirely satirical, however a large portion of the above-mentioned facts are actually true. The entries and responses were written by Gabe Miller(Susan's youngest son), friends, and perhaps some internet visitors. This website runs on a Linux, Apache, MySQL, and PHP stack and its construction was a PHP learning experience. I hope you enjoyed reading!
+<p>This website is satirical, however many of the above-mentioned facts are actually true. The entries and responses were written by Gabe Miller(Susan's youngest son), friends, and perhaps some internet visitors. This website runs on a Linux, Apache, MySQL, and PHP stack and its construction was a PHP learning experience. I hope you enjoyed reading!
 
 <?php
 include 'footer.php';

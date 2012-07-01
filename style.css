@@ -10,8 +10,8 @@ body {background-color:#fff; color:#000; padding:0px; margin:0px;}
 a {color:#000;}
 a:hover, a:focus {color: #64f;}
 ul{padding:0px;}
-#leftblock{float:left; margin:4px; padding:4px;width: 460px; height:480px; border:1px solid #000;}
-#rightblock{float:right; width:460px; margin:4px; padding:4px; height:480px; border:1px solid #000;}
+#leftblock{float:left; margin:4px; padding:4px;width: 460px; min-height:480px; border:1px solid #000;}
+#rightblock{float:right; width:460px; margin:4px; padding:4px; min-height:480px; border:1px solid #000;}
 #footer {padding-top:24px; padding-bottom:24px; text-align:center; clear:both;}
 #footer a {text-decoration:none}
 p {margin:8px 4px; padding:0px; font-size: 1.2em; font-family: arial, sans-serif;}

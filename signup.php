@@ -1,5 +1,6 @@
 <?php
 include 'header.php'; 
+include 'inc.database.php';
 echo '<h2>Sign up now!</h2>';
 
 if($_SERVER['REQUEST_METHOD'] != 'POST')
@@ -80,38 +81,31 @@ else
     }
     else
     {
-
-        $salt = time();
+        $salt = date('Y-m-d H:i:s');
         $formusername = trim($_POST['username']); 
         $formpassword = trim($_POST['password']);
         $formemail =    trim($_POST['emailaddr']);
-        $passwd = sha1($formpassword . $salt);
+        $passwd = sha1($salt.$formpassword);
         $sql = 'INSERT INTO users(username, email, pass, salt, create_date)
         VALUES(?, ?, ?, ?, ?)';
 
-        include_once 'inc.database.php';
-        //$conn = new mysqli('localhost', 'user', 'password', 'ex10') or die ('cannot open db');
-        $conn = dbConnect();
-        echo print_r($conn);
-        $stmt = $conn->stmt_init();
-        echo "so far so good..."; 
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('sssii', $formusername, $formemail, $passwd, $salt, $salt);
-    
+        $connection = dbConnect();
+        $stmt = $connection->stmt_init();
+        $stmt = $connection->prepare($sql);
+        $stmt->bind_param('sssss', $formusername, $formemail, $passwd, $salt, $salt);
         $stmt->execute();
         if ($stmt->affected_rows == 1) 
         {
-            echo "$formusername has been registered. You may now log in.";
+            echo "$formusername has been registered. Get ready for Susan to eviscerate your writing! ";
         }
         elseif($stmt->errno == 1062)
         {
-            echo "$formusername is already in use. Please choose another username.";
+            echo "The username <em>$formusername</em> is already in use. Please choose another username.";
         }
         else
         {
             echo "There was a problem with the database.";
         }
-        echo 'You\'re registered! Get ready for Susan to eviscerate your writing!!';
     }
 }
 include 'footer.php';
