@@ -16,7 +16,7 @@
     <?php
     if($_SESSION['signed_in'])
     {
-        echo '<li><a href="user.php">'.htmlentities($_SESSION['username']).'</a></li><li><a class="login"> href="signout.php">Sign out</a>';
+        echo '<li><a href="user.php">'.htmlentities($_SESSION['username']).'</a></li><li><a class="login" href="signout.php">Sign out</a>';
     }
     else
     {

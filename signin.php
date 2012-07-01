@@ -1,6 +1,6 @@
 <?php
 
-//include 'inc.database.php';
+include 'inc.database.php';
 include 'header.php';
 
 echo '<h2>Sign in</h2>';
@@ -22,22 +22,18 @@ else
     else
     {
         $errors = array();
-        echo 'what?';
-        if(!isset($_POST['username']))
+        if(strlen($_POST['username'])<5)
         {
-            $errors = 'The username field is empty. Enter your username.';
-        echo 'what2?'; 
+            $errors[] = 'Your username must be at least 5 characters.';
         }
         
-        if(!isset($_POST['password']))
+        if(strlen($_POST['password'])<5)
         {
-            $errors = 'The password field is empty. Enter your password.';
-        echo 'what3?'; 
+            $errors[] = 'Your password must be at least 5 characters.';
         }
 
         if(!empty($errors))
         {
-            echo 'what4?';
             if(count($errors)>1)
             {
                 echo 'It looks like you had some errors:<br><ul>';
@@ -45,10 +41,6 @@ else
             elseif(count($errors)==1)
             {
                 echo 'It looks like you had an error:<br><ul>';
-            }
-            else
-            {
-                echo 'what happened here?';
             }
             
             foreach($errors as $key => $value)
@@ -59,10 +51,26 @@ else
         }
         else
         {
-            // run SQL query to sign in
-            // check that the user exists with that password
-            // otherwise do not sign in
-            echo 'what5?';
+        $query = 'SELECT username, pass, salt
+                FROM users
+                WHERE username = "'.$_POST['username'].'"';
+                
+        $connection = dbConnect();
+        $stmt = $connection->prepare($query);
+        $stmt->execute();
+        $stmt->bind_result($username, $password, $salt);
+        $stmt->fetch();
+        //echo '$username = '.$username.'<br>$password = '.$password.'<br> $salt = '.$salt; 
+        if ($password == sha1($salt.$_POST['password']))
+            {
+            $_SESSION['signed_in']= true;
+            $_SESSION['username'] = $username; 
+            echo "Welcome back $username"; 
+            }
+            else
+            {
+            echo 'Your username/password combination did not match our records. Please try again.';
+            } 
         }
 
     }
