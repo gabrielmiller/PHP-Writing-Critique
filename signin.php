@@ -51,19 +51,20 @@ else
         }
         else
         {
-        $query = 'SELECT username, pass, salt
+        $query = 'SELECT pk, username, pass, salt
                 FROM users
                 WHERE username = "'.$_POST['username'].'"';
                 
         $connection = dbConnect();
         $stmt = $connection->prepare($query);
         $stmt->execute();
-        $stmt->bind_result($username, $password, $salt);
+        $stmt->bind_result($user_pk, $username, $password, $salt);
         $stmt->fetch();
         //echo '$username = '.$username.'<br>$password = '.$password.'<br> $salt = '.$salt; 
         if ($password == sha1($salt.$_POST['password']))
             {
             $_SESSION['signed_in']= true;
+            $_SESSION['user_pk'] = $user_pk; 
             $_SESSION['username'] = $username; 
             echo "Welcome back $username"; 
             echo '<meta http-equiv="REFRESH" content="0;url=index.php">';
