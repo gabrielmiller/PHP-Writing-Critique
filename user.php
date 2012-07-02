@@ -10,22 +10,27 @@ if($_SESSION['signed_in'] == true)
 
 <?php
 
-$query = 'SELECT published, create_date, pub_date, text, response 
+$query = 'SELECT users.create_date AS user_date, published, posts.create_date, pub_date, text, response 
           FROM posts 
+          INNER JOIN users ON posts.author = users.pk
           WHERE author = '.$_SESSION['user_pk'].'
-          ORDER BY create_date DESC';
+          ORDER BY posts.create_date ASC';
 
 if($_SESSION['user_pk'] != '001')
 {
-    //echo 'You created your account on '.date("F jS Y g:i A", strtotime($account_date)); 
     
     $connection = dbConnect();
     $stmt = $connection->prepare($query);
     $stmt->execute();
-    $stmt->bind_result($pub_status, $date_create, $date_pub, $text_original, $text_response);
-
+    $stmt->bind_result($user_date, $pub_status, $date_create, $date_pub, $text_original, $text_response);
+    $a = True;
     while ($stmt->fetch())
     {
+        if ($a == TRUE)
+        {
+        echo 'You created your account, <em>'.$_SESSION['username'].'</em>, on '.date("F jS Y", strtotime($user_date)).'.<br><h2>Your posted entries:</h2>'; 
+        }
+        $a = NULL;
         echo '<div>Submitted '.date("F jS Y g:i A", strtotime($date_create)).'<br>';
         echo "<p>text: $text_original</p>";
         if ($pub_status==1)
