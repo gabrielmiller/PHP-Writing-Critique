@@ -50,7 +50,7 @@ else
     echo "<br>";
     if($_SERVER['REQUEST_METHOD'] != 'POST')
     {
-        $query = 'SELECT users.username, posts.create_date, text, published, pub_date, response
+        $query = 'SELECT posts.pk, users.username, posts.create_date, text, published, pub_date, response
                   FROM posts 
                   INNER JOIN users ON posts.author = users.pk
                   ORDER BY posts.create_date ASC';
@@ -58,15 +58,15 @@ else
         $connection = dbConnect();
         $stmt = $connection->prepare($query);
         $stmt->execute();
-        $stmt->bind_result($sub_name, $createdate, $text_original, $pub_status, $date_pub, $text_response);
+        $stmt->bind_result($post_pk, $sub_name, $createdate, $text_original, $pub_status, $date_pub, $text_response);
         while ($stmt->fetch())
         {
             echo "<article class=\"submission\">$sub_name submitted on ".date("F jS Y g:i A", strtotime($createdate)).":<br>";
-            echo "<p>$text_original</p>";
+            echo "<p><a class=\"submissionlink\" href=\"edit.php?article=$post_pk\">".substr($text_original,0,100)."...</a></p>";
             if ($pub_status==1)
             {
                 echo "Published on ".date("F jS Y g:i A", strtotime($date_pub)).".";
-                echo "Your response was: <br><p>$text_response</p>";
+                echo "Your response was: <br><p><a class=\"submissionlink\" href=\"edit.php?article=$post_pk\">".substr($text_response,0,100)."...</a></p>";
             }        
             else
             {
