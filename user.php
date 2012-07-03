@@ -6,12 +6,12 @@ if($_SESSION['signed_in'] == true)
 {
 ?>
 
-<h2>User information:</h2>
 
 <?php
 
 if($_SESSION['user_pk'] != '001')
 {
+    echo "<h2>User information:</h2>";
     $query = 'SELECT users.create_date AS user_date, published, posts.create_date, pub_date, text, response 
               FROM posts 
               INNER JOIN users ON posts.author = users.pk
@@ -47,36 +47,39 @@ if($_SESSION['user_pk'] != '001')
 }
 else
 {
-
-//if($_SERVER['REQUEST_METHOD'] != 'POST')
-//{}
-//else
-//{}
-
-    $query = 'SELECT users.username, posts.create_date, text, published, pub_date, response
-              FROM posts 
-              INNER JOIN users ON posts.author = users.pk
-              ORDER BY posts.create_date ASC';
-
-    $connection = dbConnect();
-    $stmt = $connection->prepare($query);
-    $stmt->execute();
-    $stmt->bind_result($sub_name, $createdate, $text_original, $pub_status, $date_pub, $text_response);
-    while ($stmt->fetch())
+    echo "<br>";
+    if($_SERVER['REQUEST_METHOD'] != 'POST')
     {
-        echo "$sub_name submitted on ".date("F jS Y g:i A", strtotime($createdate)).":<br>";
-        echo "<p>$text_original</p>";
-        if ($pub_status==1)
+        $query = 'SELECT users.username, posts.create_date, text, published, pub_date, response
+                  FROM posts 
+                  INNER JOIN users ON posts.author = users.pk
+                  ORDER BY posts.create_date ASC';
+
+        $connection = dbConnect();
+        $stmt = $connection->prepare($query);
+        $stmt->execute();
+        $stmt->bind_result($sub_name, $createdate, $text_original, $pub_status, $date_pub, $text_response);
+        while ($stmt->fetch())
         {
-            echo "Published on ".date("F jS Y g:i A", strtotime($date_pub)).".";
-            echo "Your response was: <br><p>$text_response</p>";
-        }        
-        else
-        {
-            echo "You haven't published this entry.";
+            echo "<article class=\"submission\">$sub_name submitted on ".date("F jS Y g:i A", strtotime($createdate)).":<br>";
+            echo "<p>$text_original</p>";
+            if ($pub_status==1)
+            {
+                echo "Published on ".date("F jS Y g:i A", strtotime($date_pub)).".";
+                echo "Your response was: <br><p>$text_response</p>";
+            }        
+            else
+            {
+                echo "You haven't published this entry.";
+            }
+            echo "</article>"; 
         }
-        echo "<hr>"; 
     }
+    else
+    {
+    //
+    }
+
 }
 
 
