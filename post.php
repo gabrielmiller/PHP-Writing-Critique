@@ -11,11 +11,13 @@ if ($_SESSION['signed_in'] == true)
             echo "<h2>Your post was submitted.</h2>";
         }
 
-        echo "  <h2>Post a new piece:<h2>
+        echo "  <h2>Post a new piece:</h2>
             <form id=\"post\" action=\"\" method=\"POST\">
-            <P><textarea name=\"text\"></textarea></p>
+            <br><textarea name=\"text\"></textarea><br>
+            <center>
             <button type=\"submit\" name=\"send\" value=\"1\">Submit</button>
             <button type=\"reset\" value=\"reset\">Reset</button>
+            </center>
             </form>";
     }
     elseif (isset($_POST['send']) && $_POST['send']==1)

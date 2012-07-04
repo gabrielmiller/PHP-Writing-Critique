@@ -16,7 +16,7 @@ else
         echo '<form method="post" action="">
                 <p><label>Username:</label><input type="text" name="username" id="username"></p>
                 <p><label>Password:</label><input type="password" name="password" id="password"></p>
-                <button type="submit" value="send">Sign in</button>
+                <center><button type="submit" value="send">Sign in</button></center>
                 </form>';
     }
     else

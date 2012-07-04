@@ -38,19 +38,19 @@ if ($_SESSION['signed_in'] == true)
 
                 echo"   <div id=\"submissionEdit\">
                         <form method=\"POST\" action=\"edit.php?article=$pk\">
-                        <p><label>Author: $username</label></p>
+                        <p><label>Author: <em>$username</em></label></p>
                         <p><label>Date submitted: ".date("F jS Y g:i A", strtotime($date_create))."</label></p>
-                        <p><label>Submitted text: </label>$text_original</p>";
+                        <p><label>Submitted text: </label></p><p id=\"submitted\">$text_original</p>";
                             if($pubstatus==1)
                             {
                             echo "
                         <p><label>Date published: ".date("F jS Y g:i A", strtotime($date_pub))."</label></p>";
                             }
-                        echo "<p><label>Response text: </label><textarea name=\"response\">$text_response</textarea></p>
-                        <p><label>Published?</label><input type=\"checkbox\" name=\"published\" ";
+                        echo "<p><label>Response text: </label></p><textarea name=\"response\">$text_response</textarea></br>
+                        <p><label>Published?</label><input id=\"checkbox\" type=\"checkbox\" name=\"published\" ";
                             if($pubstatus==1){echo "checked";}
                 echo"                                                                     ></p>
-                        <button type=\"submit\" name=\"send\" value=\"1\">Save changes</button>
+                        <center><button type=\"submit\" name=\"send\" value=\"1\">Save changes</button></center>
                         </form>
                         </div>";
             }

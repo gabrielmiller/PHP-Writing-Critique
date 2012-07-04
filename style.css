@@ -21,3 +21,16 @@ h2 {margin:16px 8px; padding:0px; font-style: italic; font-size: 1.4em; font-wei
 #chart {clear:both;}
 .submission {background-color:#eee; border:1px solid #666; padding:6px;}
 .submission + .submission {margin:12px 0px;}
+form{border:1px solid #666; background-color:#eee; margin:12px; padding:12px;}
+form p{padding:12px; margin:24px;}
+form label{float:left; width:360px; text-align:right; margin-right:25px; font-size:1.2em;}
+form button{background-color:#ccc; border:1px solid #666; font-size: 1.2em;}
+form button:focus, form button:hover{background-color:#64f; color:#fff; border:1px solid #fff;}
+form input{width:240px; margin:0px; border:1px solid #666; font-size: 1.2em;}
+form input:focus, input:hover{background-color:#64f; color:#fff; border:1px solid #fff;}
+textarea{width:840px; padding:12px; margin:12px 24px; min-height:200px; border:1px solid #666; font-size: 1.2em;}
+textarea:focus, textarea:hover{background-color:#64f; color:#fff; border:1px solid #fff;}
+#checkbox {margin:3px 12px; width:12px;}
+#submissionEdit label {width:800px; text-align:left;}
+#submitted {background-color: #fff; border:1px solid #666; margin:36px 36px 12px 36px; font-size:1.2em;}
+//#submissionEdit form p textarea {font-family: Arial, Sans; font-size: 1.2em;}
