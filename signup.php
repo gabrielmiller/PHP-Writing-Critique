@@ -6,7 +6,7 @@ echo '<h2>Sign up now!</h2>';
 if($_SERVER['REQUEST_METHOD'] != 'POST')
 {
 echo '<form id="signup" action="" method=POST>
-    <p><label>Email:</label><input type="text" name="emailaddr" id="emailiaddr"></p>
+    <p><label>Email:</label><input type="text" name="emailaddr" id="emailaddr"></p>
     <p><label>Username:</label><input type="text" name="username" id="username"></p>
     <p><label>Password:</label><input type="password" name="password" id="password"></p>
     <p><label>Re-enter Password:</label><input type="password" name="password2" id="password2"></p>

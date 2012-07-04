@@ -12,6 +12,7 @@ if($_SESSION['signed_in'] == true)
     $_SESSION['user_name'] = NULL;
     $_SESSION['user_pk'] = NULL;
 
+    header("Location:index.php?signed_out=1");
     echo 'You succesfully signed out.';
 }
 else

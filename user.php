@@ -30,7 +30,7 @@ if($_SESSION['user_pk'] != '001')
         echo 'You created your account, <em>'.$_SESSION['username'].'</em>, on '.date("F jS Y", strtotime($user_date)).'.<br><h2>Your posted entries:</h2>'; 
         }
         $a = NULL;
-        echo '<div>Submitted '.date("F jS Y g:i A", strtotime($date_create)).'<br>';
+        echo '<article class="submission">Submitted on '.date("F jS Y g:i A", strtotime($date_create)).'<br>';
         echo "<p>text: $text_original</p>";
         if ($pub_status==1)
         {
@@ -41,7 +41,7 @@ if($_SESSION['user_pk'] != '001')
         {
             echo "Not yet published.";
         }
-        echo "</div>";
+        echo "</article>";
     }
 
 }
@@ -65,8 +65,8 @@ else
             echo "<p><a class=\"submissionlink\" href=\"edit.php?article=$post_pk\">".substr($text_original,0,100)."...</a></p>";
             if ($pub_status==1)
             {
-                echo "Published on ".date("F jS Y g:i A", strtotime($date_pub)).".";
-                echo "Your response was: <br><p><a class=\"submissionlink\" href=\"edit.php?article=$post_pk\">".substr($text_response,0,100)."...</a></p>";
+                echo "Your response, published on ".date("F jS Y g:i A", strtotime($date_pub)).", ";
+                echo "was: <br><p><a class=\"submissionlink\" href=\"edit.php?article=$post_pk\">".substr($text_response,0,100)."...</a></p>";
             }        
             else
             {
