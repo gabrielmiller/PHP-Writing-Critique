@@ -18,11 +18,11 @@
     {
         if($_SESSION['user_pk']==1)
         {
-            echo '<li><a href="user.php">Administration</a></li><li><a class="login" href="signout.php">Sign out</a>';
+            echo '<li><a class="login" href="signout.php">Sign out</a></li><li><a href="user.php">Administration</a></li>';
         }
         else
         {
-            echo '<li><a href="user.php">'.htmlentities($_SESSION['username']).'</a></li><li><a class="login" href="signout.php">Sign out</a>';
+            echo '<li><a class="login" href="signout.php">Sign out</a></li><li><a href="user.php">'.htmlentities($_SESSION['username']).'</a></li>';
         }
     }
     else

@@ -1,31 +1,31 @@
 CREATE DATABASE `ex10`;
 
-CREATE TABLE `users` (
-`pk` int(3) unsigned NOT NULL AUTO_INCREMENT,
-`username` varchar(60) NOT NULL,
-`email` varchar(255) NOT NULL,
-`pass` varchar(60) NOT NULL,
-`salt` varchar(60) NOT NULL,
-`create_date` DATETIME,
-) ENGINE='InnoDB';
+CREATE TABLE IF NOT EXISTS `users` (
+  `pk` int(3) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(60) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `pass` varchar(300) NOT NULL,
+  `salt` varchar(300) NOT NULL,
+  `create_date` datetime NOT NULL,
+  PRIMARY KEY (`pk`),
+  UNIQUE KEY `username_unique` (`username`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-ALTER TABLE `users`
-ADD PRIMARY KEY (`pk`),
-ADD UNIQUE `username_unique` (`username`),
-
-CREATE TABLE `posts` (
-`pk` int(3) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-`author` int(3) unsigned NOT NULL,
-`published` tinyint(1) NOT NULL,
-`create_date` datetime NOT NULL,
-`pub_date` datetime NOT NULL,
-`text` varchar(8000) NOT NULL,
-`response` varchar(8000) NOT NULL
-) ENGINE='InnoDB';
+CREATE TABLE IF NOT EXISTS `posts` (
+  `pk` int(3) unsigned NOT NULL AUTO_INCREMENT,
+  `author` int(3) unsigned NOT NULL,
+  `published` tinyint(1) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `pub_date` datetime NOT NULL,
+  `text` varchar(8000) NOT NULL,
+  `response` varchar(8000) NOT NULL,
+  PRIMARY KEY (`pk`),
+  KEY `author` (`author`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 ALTER TABLE `posts`
 ADD FOREIGN KEY (`author`) REFERENCES `users` (`pk`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 INSERT INTO `users` (`pk`, `username`, `email`, `pass`, `salt`, `create_date`)
-VALUES ('000', 'susan', 'testsusan@gmail.com', 'password', 'salt', now());
+VALUES ('001', 'susan', 'testsusan@gmail.com', 'password', 'salt', now());
 

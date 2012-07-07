@@ -1,6 +1,7 @@
 <?php
 include 'inc.database.php';
-include 'header.php';
+
+$page = "";
 
 if ($_SESSION['signed_in'] == true)
 {
@@ -8,10 +9,10 @@ if ($_SESSION['signed_in'] == true)
     {
         if($_GET['success']==1)
         {
-            echo "<h2>Your post was submitted.</h2>";
+            $page .= "<h2>Your post was submitted. It will be reviewed and published at a later date.</h2>";
         }
 
-        echo "  <h2>Post a new piece:</h2>
+        $page .= "  <h2>Post a new piece:</h2>
             <form id=\"post\" action=\"\" method=\"POST\">
             <br><textarea name=\"text\"></textarea><br>
             <center>
@@ -25,32 +26,42 @@ if ($_SESSION['signed_in'] == true)
                 $text = trim($_POST['text']);
                 if(strlen($text)>8000)
                 {
-                    echo "<br>Your text is longer than 8000 characters. Please shorten it."; 
+                    $page .= "<br>Your text is longer than 8000 characters. Please shorten it."; 
                 }
                 else
                 {
-                $create_date = date('Y-m-d H:i:s');
-                $author = $_SESSION['user_pk'];
-                $query = "INSERT into posts(author, create_date, text)
-                VALUES(?, ?, ?)";
+                    if(strlen($text)<100)
+                    {
+                        $page .= "<br>Your text is shorter than 100 characters. Please enter more.";
+                    }
+                    else
+                    {
+                        $create_date = date('Y-m-d H:i:s');
+                        $author = $_SESSION['user_pk'];
+                        $query = "INSERT into posts(author, create_date, text)
+                            VALUES(?, ?, ?)";
 
-                $connection = dbConnect();
-                $stmt = $connection->stmt_init();
-                $stmt = $connection->prepare($query);
-                $stmt->bind_param('iss', $author, $create_date, $text);
-                $stmt->execute();
-                header("Location:post.php?success=1");
+                        $connection = dbConnect();
+                        $stmt = $connection->stmt_init();
+                        $stmt = $connection->prepare($query);
+                        $stmt->bind_param('iss', $author, $create_date, $text);
+                        $stmt->execute();
+                        header("Location:post.php?success=1");
+                        exit;
+                    }
                 }
             }
     else
     {
         header("Location: index.php");
+        exit;
     }
 }
 else
 {
-   echo '<p>You are not <a href="signin.php">signed in</a>.</p>';
+   $page .= '<p>You are not <a href="signin.php">signed in</a>.</p>';
 }
-
+include 'header.php';
+print $page;
 include 'footer.php';
 ?>

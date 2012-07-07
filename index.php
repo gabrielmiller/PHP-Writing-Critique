@@ -2,10 +2,10 @@
 include 'inc.database.php';
 include 'header.php';
 
-if($_GET['signed_out']==1)
+/*if($_GET['signed_out']==1)
 {
-    echo "<h3>You successfully signed out.</h3>";
-}
+    echo "<center><h3>You successfully signed out.</h3></center>";
+}*/
 
 ?>
 <h2>Most recent review:</h2>

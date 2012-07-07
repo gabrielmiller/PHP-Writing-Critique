@@ -1,18 +1,20 @@
 <?php
-include 'header.php'; 
 include 'inc.database.php';
+
+$page = "";
 
 if(isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true)
 {
-    echo '<h2>You\'re already signed in.</h2>';
+    header('Location: index.php');
+    exit;
 }
 else
 {
-    echo '<h2>Sign up now!</h2>';
+    $page .= '<h2>Sign up now!</h2>';
 
     if($_SERVER['REQUEST_METHOD'] != 'POST')
     {
-        echo '<form id="signup" action="" method=POST>
+        $page .= '<form id="signup" action="" method=POST>
             <p><label>Email:</label><input type="text" name="emailaddr" id="emailaddr"></p>
             <p><label>Username:</label><input type="text" name="username" id="username"></p>
             <p><label>Password:</label><input type="password" name="password" id="password"></p>
@@ -74,17 +76,17 @@ else
         {
             if(count($errors)>1)
             {
-                echo 'It looks you had some errors:<br><ul>';
+                $page .= 'It looks you had some errors:<br><ul>';
             }
             elseif(count($errors)==1)
             {
-                echo 'It looks like you had an error:<br><ul>';
+                $page .= 'It looks like you had an error:<br><ul>';
             }
             foreach($errors as $key => $value)
             {
-                echo '<li>'.$value.'</li>';
+                $page .= '<li>'.$value.'</li>';
             }
-            echo '</ul>';
+            $page .= '</ul>';
         }
         else
         {
@@ -104,18 +106,20 @@ else
             $stmt->execute();
             if ($stmt->affected_rows == 1) 
             {
-                echo "$formusername has been registered. Get ready for Susan to eviscerate your writing! ";
+                $page .= "$formusername has been registered. Get ready for Susan to eviscerate your writing! ";
             }
             elseif($stmt->errno == 1062)
             {
-                echo "The username <em>$formusername</em> is already in use. Please choose another username.";
+                $page .= "The username <em>$formusername</em> is already in use. Please choose another username.";
             }
             else
             {
-                echo "There was a problem with the database.";
+                $page .=  "There was a problem with the database.";
             }
         }
     }
 }
+include 'header.php'; 
+print $page;
 include 'footer.php';
 ?>
